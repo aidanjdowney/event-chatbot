@@ -8,6 +8,10 @@ from llama_index.core import StorageContext, load_index_from_storage
 from llama_index.core.settings import Settings
 from llama_index.llms.openai import OpenAI
 import pytz
+
+# Fixing PermissionError by setting custom tiktoken cache directory
+os.environ["TIKTOKEN_CACHE_DIR"] = "./tiktoken_cache")
+
 tz = pytz.timezone('America/New_York')
 
 # Set the API key explicitly from Streamlit secrets (make sure your secrets.toml includes your key)
@@ -19,6 +23,9 @@ load_dotenv()
 
 # Set up the OpenAI LLM (using GPT-3.5-turbo; change to GPT-4 if desired)
 Settings.llm = OpenAI(model="gpt-3.5-turbo")
+
+from llama_index.core.node_parser import SimpleNodeParser
+Settings.node_parser = SimpleNodeParser()
 
 # Load the stored index and create chat engine
 storage_context = StorageContext.from_defaults(persist_dir="./winterville_events_index")
