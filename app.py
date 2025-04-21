@@ -10,8 +10,9 @@ from llama_index.llms.openai import OpenAI
 import pytz
 
 # Fixing PermissionError by setting custom tiktoken cache directory
-os.environ["TIKTOKEN_CACHE_DIR"] = "./tiktoken_cache")
+os.environ["TIKTOKEN_CACHE_DIR"] = "./tiktoken_cache"
 
+# Set the timezone to Eastern Time
 tz = pytz.timezone('America/New_York')
 
 # Set the API key explicitly from Streamlit secrets (make sure your secrets.toml includes your key)
